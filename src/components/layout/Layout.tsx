@@ -24,7 +24,7 @@ const Layout = ({ children }: LayoutProps) => {
       
       <footer className="py-6 px-6 text-center text-gray-500 text-sm border-t border-gray-100">
         <div className="max-w-7xl mx-auto">
-          <p>© {new Date().getFullYear()} DataViz. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} SeniorSense. All rights reserved.</p>
         </div>
       </footer>
     </div>
