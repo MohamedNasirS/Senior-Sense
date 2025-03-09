@@ -91,8 +91,9 @@ const HealthcareInsights = () => {
           <DataChart 
             data={monthlySpendingData}
             type="line"
+            dataKey="planned" /* Added the required dataKey prop */
             height={isMobile ? 250 : 300}
-            // Custom rendering for multiple lines
+            /* Custom rendering for multiple lines */
             customChart={
               <div className="w-full h-full">
                 {/* Custom chart rendering goes here */}
