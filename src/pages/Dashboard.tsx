@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { BarChart2, LineChart, PieChart, TrendingUp, Users, Activity, DollarSign, Filter } from "lucide-react";
@@ -8,6 +7,7 @@ import StatCard from "@/components/dashboard/StatCard";
 import CustomButton from "@/components/ui/CustomButton";
 import HealthcareInsights from "@/components/dashboard/HealthcareInsights";
 import UserEngagementInsights from "@/components/dashboard/UserEngagementInsights";
+import FinancialInsights from "@/components/dashboard/FinancialInsights";
 
 // Mock data
 const generateMockData = () => {
@@ -274,13 +274,7 @@ const Dashboard = () => {
       
       {activeTab === "healthcare" && <HealthcareInsights />}
       
-      {activeTab === "financial" && (
-        <div className="p-8 text-center text-gray-500 border border-gray-200 rounded-lg">
-          <TrendingUp size={40} className="mx-auto mb-4 text-gray-400" />
-          <h3 className="text-xl font-medium mb-2">Financial Insights</h3>
-          <p>This section is coming soon!</p>
-        </div>
-      )}
+      {activeTab === "financial" && <FinancialInsights />}
     </div>
   );
 };
