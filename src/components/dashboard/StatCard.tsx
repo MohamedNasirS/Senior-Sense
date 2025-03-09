@@ -11,6 +11,7 @@ interface StatCardProps {
     isPositive: boolean;
   };
   className?: string;
+  style?: React.CSSProperties;
 }
 
 const StatCard: React.FC<StatCardProps> = ({
@@ -18,7 +19,8 @@ const StatCard: React.FC<StatCardProps> = ({
   value,
   icon,
   trend,
-  className
+  className,
+  style
 }) => {
   return (
     <div 
@@ -26,6 +28,7 @@ const StatCard: React.FC<StatCardProps> = ({
         "glass-card rounded-2xl p-6 hover-lift",
         className
       )}
+      style={style}
     >
       <div className="flex justify-between items-start mb-2">
         <h3 className="text-sm font-medium text-gray-500">{title}</h3>

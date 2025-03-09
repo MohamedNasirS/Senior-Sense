@@ -3,9 +3,11 @@ import React, { useState, useEffect } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { BarChart2, LineChart, PieChart, TrendingUp, Users, Activity, DollarSign, Filter } from "lucide-react";
 import DashboardCard from "@/components/dashboard/DashboardCard";
-import DataChart, { ChartType } from "@/components/dashboard/DataChart";
+import DataChart from "@/components/dashboard/DataChart";
 import StatCard from "@/components/dashboard/StatCard";
 import CustomButton from "@/components/ui/CustomButton";
+import HealthcareInsights from "@/components/dashboard/HealthcareInsights";
+import UserEngagementInsights from "@/components/dashboard/UserEngagementInsights";
 
 // Mock data
 const generateMockData = () => {
@@ -29,6 +31,7 @@ const Dashboard = () => {
   const [data, setData] = useState(generateMockData());
   const [isLoading, setIsLoading] = useState(true);
   const [filterPeriod, setFilterPeriod] = useState("monthly");
+  const [activeTab, setActiveTab] = useState("overview");
   
   useEffect(() => {
     // Simulate loading data
@@ -110,6 +113,52 @@ const Dashboard = () => {
         </div>
       </div>
       
+      {/* Insights tabs */}
+      <div className="mb-6 border-b border-gray-200">
+        <div className="flex space-x-8">
+          <button
+            onClick={() => setActiveTab("overview")}
+            className={`py-2 border-b-2 font-medium text-sm ${
+              activeTab === "overview"
+                ? "border-primary text-primary"
+                : "border-transparent text-gray-500 hover:text-gray-700"
+            }`}
+          >
+            Overview
+          </button>
+          <button
+            onClick={() => setActiveTab("engagement")}
+            className={`py-2 border-b-2 font-medium text-sm ${
+              activeTab === "engagement"
+                ? "border-primary text-primary"
+                : "border-transparent text-gray-500 hover:text-gray-700"
+            }`}
+          >
+            User Engagement
+          </button>
+          <button
+            onClick={() => setActiveTab("healthcare")}
+            className={`py-2 border-b-2 font-medium text-sm ${
+              activeTab === "healthcare"
+                ? "border-primary text-primary"
+                : "border-transparent text-gray-500 hover:text-gray-700"
+            }`}
+          >
+            Healthcare
+          </button>
+          <button
+            onClick={() => setActiveTab("financial")}
+            className={`py-2 border-b-2 font-medium text-sm ${
+              activeTab === "financial"
+                ? "border-primary text-primary"
+                : "border-transparent text-gray-500 hover:text-gray-700"
+            }`}
+          >
+            Financial
+          </button>
+        </div>
+      </div>
+      
       {/* Stats Row */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         <StatCard 
@@ -146,75 +195,92 @@ const Dashboard = () => {
         />
       </div>
       
-      {/* Charts Row */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-        <DashboardCard 
-          title="User Activity" 
-          subtitle="User engagement over time"
-          className="lg:col-span-2 animate-fade-in"
-          style={{ animationDelay: '500ms' }}
-          collapsible
-          actions={renderCardAction}
-        >
-          <DataChart 
-            data={data} 
-            type="area" 
-            dataKey="value"
-            height={isMobile ? 250 : 300}
-          />
-        </DashboardCard>
-        
-        <DashboardCard 
-          title="Device Distribution" 
-          subtitle="Users by device type"
-          className="animate-fade-in"
-          style={{ animationDelay: '600ms' }}
-          collapsible
-          actions={renderCardAction}
-        >
-          <DataChart 
-            data={pieData} 
-            type="pie" 
-            dataKey="value"
-            height={isMobile ? 220 : 300}
-          />
-        </DashboardCard>
-      </div>
+      {/* Content based on active tab */}
+      {activeTab === "overview" && (
+        <>
+          {/* Charts Row */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+            <DashboardCard 
+              title="User Activity" 
+              subtitle="User engagement over time"
+              className="lg:col-span-2 animate-fade-in"
+              style={{ animationDelay: '500ms' }}
+              collapsible
+              actions={renderCardAction}
+            >
+              <DataChart 
+                data={data} 
+                type="area" 
+                dataKey="value"
+                height={isMobile ? 250 : 300}
+              />
+            </DashboardCard>
+            
+            <DashboardCard 
+              title="Device Distribution" 
+              subtitle="Users by device type"
+              className="animate-fade-in"
+              style={{ animationDelay: '600ms' }}
+              collapsible
+              actions={renderCardAction}
+            >
+              <DataChart 
+                data={pieData} 
+                type="pie" 
+                dataKey="value"
+                height={isMobile ? 220 : 300}
+              />
+            </DashboardCard>
+          </div>
+          
+          {/* Additional Charts */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <DashboardCard 
+              title="Revenue Trends" 
+              subtitle="Monthly revenue performance"
+              className="animate-fade-in"
+              style={{ animationDelay: '700ms' }}
+              collapsible
+              actions={renderCardAction}
+            >
+              <DataChart 
+                data={data} 
+                type="bar" 
+                dataKey="revenue"
+                height={isMobile ? 250 : 300}
+              />
+            </DashboardCard>
+            
+            <DashboardCard 
+              title="User Growth" 
+              subtitle="New user acquisition"
+              className="animate-fade-in"
+              style={{ animationDelay: '800ms' }}
+              collapsible
+              actions={renderCardAction}
+            >
+              <DataChart 
+                data={data} 
+                type="line" 
+                dataKey="users"
+                height={isMobile ? 250 : 300}
+              />
+            </DashboardCard>
+          </div>
+        </>
+      )}
       
-      {/* Additional Charts */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-        <DashboardCard 
-          title="Revenue Trends" 
-          subtitle="Monthly revenue performance"
-          className="animate-fade-in"
-          style={{ animationDelay: '700ms' }}
-          collapsible
-          actions={renderCardAction}
-        >
-          <DataChart 
-            data={data} 
-            type="bar" 
-            dataKey="revenue"
-            height={isMobile ? 250 : 300}
-          />
-        </DashboardCard>
-        
-        <DashboardCard 
-          title="User Growth" 
-          subtitle="New user acquisition"
-          className="animate-fade-in"
-          style={{ animationDelay: '800ms' }}
-          collapsible
-          actions={renderCardAction}
-        >
-          <DataChart 
-            data={data} 
-            type="line" 
-            dataKey="users"
-            height={isMobile ? 250 : 300}
-          />
-        </DashboardCard>
-      </div>
+      {activeTab === "engagement" && <UserEngagementInsights />}
+      
+      {activeTab === "healthcare" && <HealthcareInsights />}
+      
+      {activeTab === "financial" && (
+        <div className="p-8 text-center text-gray-500 border border-gray-200 rounded-lg">
+          <TrendingUp size={40} className="mx-auto mb-4 text-gray-400" />
+          <h3 className="text-xl font-medium mb-2">Financial Insights</h3>
+          <p>This section is coming soon!</p>
+        </div>
+      )}
     </div>
   );
 };

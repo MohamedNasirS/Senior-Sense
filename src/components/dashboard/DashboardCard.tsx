@@ -8,6 +8,7 @@ interface DashboardCardProps {
   subtitle?: string;
   children: React.ReactNode;
   className?: string;
+  style?: React.CSSProperties;
   collapsible?: boolean;
   actions?: React.ReactNode;
 }
@@ -17,6 +18,7 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
   subtitle,
   children,
   className,
+  style,
   collapsible = false,
   actions
 }) => {
@@ -29,6 +31,7 @@ const DashboardCard: React.FC<DashboardCardProps> = ({
         "glass-card rounded-2xl overflow-hidden transition-all duration-300",
         className
       )}
+      style={style}
     >
       <div className="px-6 py-4 flex items-center justify-between border-b border-gray-100">
         <div className="flex-1">

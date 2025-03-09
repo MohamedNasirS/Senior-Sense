@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from "react";
-import { LineChart, Line, AreaChart, Area, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
+import { LineChart, Line, AreaChart, Area, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from "recharts";
 import { cn } from "@/lib/utils";
 
 export type ChartType = "line" | "area" | "bar" | "pie";
@@ -15,6 +15,7 @@ interface DataChartProps {
   className?: string;
   showGrid?: boolean;
   animate?: boolean;
+  customChart?: React.ReactNode;
 }
 
 const DataChart: React.FC<DataChartProps> = ({
@@ -22,17 +23,22 @@ const DataChart: React.FC<DataChartProps> = ({
   type,
   dataKey,
   nameKey = "name",
-  colors = ["#0070F3", "#10B981", "#F59E0B", "#EF4444", "#8B5CF6"],
+  colors = ["#0070F3", "#10B981", "#8B5CF6", "#F59E0B", "#EF4444"],
   height = 300,
   className,
   showGrid = true,
   animate = true,
+  customChart
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   
   useEffect(() => {
     setIsVisible(true);
   }, []);
+  
+  if (customChart) {
+    return <div className={cn("w-full", className)}>{customChart}</div>;
+  }
   
   const renderChart = () => {
     switch (type) {
@@ -62,15 +68,18 @@ const DataChart: React.FC<DataChartProps> = ({
                   padding: '12px' 
                 }} 
               />
-              <Line 
-                type="monotone" 
-                dataKey={dataKey} 
-                stroke={colors[0]} 
-                strokeWidth={2}
-                dot={{ r: 4, strokeWidth: 2 }}
-                activeDot={{ r: 6, strokeWidth: 2 }}
-                isAnimationActive={animate}
-              />
+              {data[0] && Object.keys(data[0]).filter(key => key !== nameKey).map((key, index) => (
+                <Line 
+                  key={key}
+                  type="monotone" 
+                  dataKey={key} 
+                  stroke={colors[index % colors.length]} 
+                  strokeWidth={2}
+                  dot={{ r: 4, strokeWidth: 2 }}
+                  activeDot={{ r: 6, strokeWidth: 2 }}
+                  isAnimationActive={animate}
+                />
+              ))}
             </LineChart>
           </ResponsiveContainer>
         );
@@ -145,12 +154,15 @@ const DataChart: React.FC<DataChartProps> = ({
                   padding: '12px' 
                 }} 
               />
-              <Bar 
-                dataKey={dataKey} 
-                fill={colors[0]} 
-                radius={[4, 4, 0, 0]}
-                isAnimationActive={animate}
-              />
+              {data[0] && Object.keys(data[0]).filter(key => key !== nameKey).slice(0, 1).map((key, index) => (
+                <Bar 
+                  key={key}
+                  dataKey={key} 
+                  fill={colors[index % colors.length]} 
+                  radius={[4, 4, 0, 0]}
+                  isAnimationActive={animate}
+                />
+              ))}
             </BarChart>
           </ResponsiveContainer>
         );
@@ -183,6 +195,7 @@ const DataChart: React.FC<DataChartProps> = ({
                   padding: '12px' 
                 }} 
               />
+              <Legend />
             </PieChart>
           </ResponsiveContainer>
         );
