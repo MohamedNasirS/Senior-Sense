@@ -11,7 +11,12 @@ import {
   Settings, 
   HelpCircle,
   Menu,
-  X
+  X,
+  HeartPulse,
+  Wallet,
+  CreditCard,
+  Calendar,
+  Clock
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -25,9 +30,12 @@ const Sidebar = ({ isOpen, setIsOpen }: SidebarProps) => {
 
   const navLinks = [
     { name: "Dashboard", path: "/dashboard", icon: <BarChart2 className="w-5 h-5" /> },
-    { name: "Health", path: "/health", icon: <Heart className="w-5 h-5" /> },
-    { name: "Finance", path: "/finance", icon: <DollarSign className="w-5 h-5" /> },
-    { name: "Medication", path: "/medication", icon: <Pill className="w-5 h-5" /> },
+    { name: "Health Status", path: "/health", icon: <HeartPulse className="w-5 h-5" /> },
+    { name: "Medication Schedule", path: "/medication", icon: <Pill className="w-5 h-5" /> },
+    { name: "Financial Health", path: "/finance", icon: <Wallet className="w-5 h-5" /> },
+    { name: "Budget Tracker", path: "/budget", icon: <CreditCard className="w-5 h-5" /> },
+    { name: "Appointments", path: "/appointments", icon: <Calendar className="w-5 h-5" /> },
+    { name: "Reminders", path: "/reminders", icon: <Clock className="w-5 h-5" /> },
     { name: "Emergency", path: "/emergency", icon: <AlertTriangle className="w-5 h-5" /> },
     { name: "Settings", path: "/settings", icon: <Settings className="w-5 h-5" /> },
     { name: "Help Center", path: "/help", icon: <HelpCircle className="w-5 h-5" /> },
@@ -62,10 +70,36 @@ const Sidebar = ({ isOpen, setIsOpen }: SidebarProps) => {
             </nav>
 
             <div className="mt-6 px-3 py-2 text-xs font-semibold text-gray-400 uppercase">
-              Health & Finance
+              Health & Medical
             </div>
             <nav className="mt-2 px-2 space-y-1">
-              {navLinks.slice(1, 4).map((link) => (
+              {navLinks.slice(1, 3).map((link) => (
+                <SidebarLink 
+                  key={link.path} 
+                  link={link} 
+                  isActive={location.pathname === link.path} 
+                />
+              ))}
+            </nav>
+
+            <div className="mt-6 px-3 py-2 text-xs font-semibold text-gray-400 uppercase">
+              Financial
+            </div>
+            <nav className="mt-2 px-2 space-y-1">
+              {navLinks.slice(3, 5).map((link) => (
+                <SidebarLink 
+                  key={link.path} 
+                  link={link} 
+                  isActive={location.pathname === link.path} 
+                />
+              ))}
+            </nav>
+
+            <div className="mt-6 px-3 py-2 text-xs font-semibold text-gray-400 uppercase">
+              Scheduling
+            </div>
+            <nav className="mt-2 px-2 space-y-1">
+              {navLinks.slice(5, 7).map((link) => (
                 <SidebarLink 
                   key={link.path} 
                   link={link} 
@@ -78,7 +112,7 @@ const Sidebar = ({ isOpen, setIsOpen }: SidebarProps) => {
               Other
             </div>
             <nav className="mt-2 px-2 space-y-1">
-              {navLinks.slice(4).map((link) => (
+              {navLinks.slice(7).map((link) => (
                 <SidebarLink 
                   key={link.path} 
                   link={link} 

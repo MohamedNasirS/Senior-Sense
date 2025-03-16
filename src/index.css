@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -43,10 +42,13 @@
   body {
     @apply bg-background text-foreground antialiased;
     font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
+    background-color: black;
+    color: white;
   }
 
   html {
     @apply overflow-x-hidden scroll-smooth;
+    background-color: black;
   }
 }
 
@@ -91,5 +93,21 @@
   .hover-lift:hover {
     transform: translateY(-2px);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  }
+  
+  .black-card {
+    @apply bg-gray-900 border border-gray-800 rounded-lg p-4;
+  }
+  
+  .health-status-card {
+    @apply black-card border-l-4 border-l-green-500;
+  }
+  
+  .medication-card {
+    @apply black-card border-l-4 border-l-blue-500;
+  }
+  
+  .financial-card {
+    @apply black-card border-l-4 border-l-yellow-500;
   }
 }
