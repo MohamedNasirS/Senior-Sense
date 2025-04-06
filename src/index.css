@@ -35,6 +35,14 @@
     --radius: 0.75rem;
   }
 
+  .theme-high-contrast {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 10%;
+    --primary: 211 100% 60%;
+    --border: 0 0% 30%;
+  }
+
   * {
     @apply border-border;
   }
@@ -50,6 +58,26 @@
     @apply overflow-x-hidden scroll-smooth;
     background-color: black;
   }
+
+  .text-small {
+    font-size: 0.875rem;
+  }
+  
+  .text-medium {
+    font-size: 1rem;
+  }
+  
+  .text-large {
+    font-size: 1.125rem;
+  }
+  
+  .text-small h1 { font-size: 1.75rem; }
+  .text-medium h1 { font-size: 2rem; }
+  .text-large h1 { font-size: 2.25rem; }
+  
+  .text-small h2 { font-size: 1.5rem; }
+  .text-medium h2 { font-size: 1.75rem; }
+  .text-large h2 { font-size: 2rem; }
 }
 
 @layer components {
@@ -109,5 +137,30 @@
   
   .financial-card {
     @apply black-card border-l-4 border-l-yellow-500;
+  }
+
+  /* Dashboard layout styles */
+  .dashboard-compact .card-spacing {
+    @apply gap-3 mb-3;
+  }
+  
+  .dashboard-comfortable .card-spacing {
+    @apply gap-6 mb-6;
+  }
+  
+  .dashboard-spacious .card-spacing {
+    @apply gap-8 mb-8;
+  }
+  
+  .dashboard-compact .card-padding {
+    @apply p-3;
+  }
+  
+  .dashboard-comfortable .card-padding {
+    @apply p-5;
+  }
+  
+  .dashboard-spacious .card-padding {
+    @apply p-7;
   }
 }
