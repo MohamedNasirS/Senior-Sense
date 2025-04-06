@@ -139,7 +139,7 @@
     @apply black-card border-l-4 border-l-yellow-500;
   }
 
-  /* Dashboard layout styles */
+  /* Dashboard layout styles with optimized sizing */  
   .dashboard-compact .card-spacing {
     @apply gap-3 mb-3;
   }
@@ -163,4 +163,36 @@
   .dashboard-spacious .card-padding {
     @apply p-7;
   }
+
+  /* Optimized card styles for personalized dashboard */
+  .glass-card {
+    @apply rounded-xl border border-gray-800/60;
+  }
+
+  .dashboard-compact .glass-card {
+    @apply rounded-lg;
+  }
+
+  .dashboard-spacious .glass-card {
+    @apply rounded-2xl;
+  }
+}
+
+/* Optimize animations for better performance */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.4s ease-out forwards;
+}
+
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.animate-scale-in {
+  animation: scale-in 0.2s ease-out forwards;
 }

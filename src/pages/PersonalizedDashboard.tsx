@@ -7,6 +7,8 @@ import HealthcareInsights from "@/components/dashboard/HealthcareInsights";
 import FinancialInsights from "@/components/dashboard/FinancialInsights";
 import { Heart, DollarSign, Bell, Calendar, Activity } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "@/components/ui/resizable";
+import { Card } from "@/components/ui/card";
 
 // Mock data for AI recommendations
 const healthRecommendations = [
@@ -73,82 +75,108 @@ const PersonalizedDashboard: React.FC = () => {
   };
 
   const renderHealthSection = () => (
-    <section>
+    <section className="mb-6">
       <div className="flex items-center gap-2 mb-4">
         <Heart className="text-red-500" size={24} />
         <h2 className="text-xl font-semibold">Health & Wellness</h2>
       </div>
       
-      <div className={cn("grid grid-cols-1 lg:grid-cols-3 card-spacing", 
-        `dashboard-${preferences.dashboardLayout}`)}>
+      <ResizablePanelGroup direction="horizontal" className={cn("rounded-lg", `dashboard-${preferences.dashboardLayout}`)}>
+        <ResizablePanel defaultSize={65} minSize={40}>
+          <DashboardCard
+            title="AI Health Recommendations"
+            subtitle="Personalized suggestions based on your data"
+            className="h-full animate-fade-in rounded-r-none"
+            style={{ animationDelay: '100ms' }}
+          >
+            <div className="space-y-3">
+              {getFilteredHealthRecs().map(rec => (
+                <div 
+                  key={rec.id} 
+                  className={cn("p-3 rounded-lg", 
+                    rec.importance === "high" 
+                      ? "bg-red-900/30 border border-red-800" 
+                      : "bg-gray-800/50 border border-gray-700"
+                  )}
+                >
+                  <p className="text-sm">{rec.text}</p>
+                </div>
+              ))}
+            </div>
+          </DashboardCard>
+        </ResizablePanel>
         
-        <DashboardCard
-          title="AI Health Recommendations"
-          subtitle="Personalized suggestions based on your data"
-          className="lg:col-span-2 animate-fade-in"
-          style={{ animationDelay: '100ms' }}
-        >
-          <div className="space-y-3">
-            {getFilteredHealthRecs().map(rec => (
-              <div 
-                key={rec.id} 
-                className={cn("p-3 rounded-lg", 
-                  rec.importance === "high" 
-                    ? "bg-red-900/30 border border-red-800" 
-                    : "bg-gray-800/50 border border-gray-700"
-                )}
-              >
-                <p className="text-sm">{rec.text}</p>
-              </div>
-            ))}
-          </div>
-        </DashboardCard>
+        <ResizableHandle withHandle />
         
-        <HealthcareInsights />
-      </div>
+        <ResizablePanel defaultSize={35} minSize={30}>
+          <DashboardCard
+            title="Healthcare Analytics"
+            subtitle="Your health trends"
+            className="h-full animate-fade-in rounded-l-none"
+            style={{ animationDelay: '150ms' }}
+          >
+            <div className="h-full">
+              <HealthcareInsights />
+            </div>
+          </DashboardCard>
+        </ResizablePanel>
+      </ResizablePanelGroup>
     </section>
   );
 
   const renderFinancialSection = () => (
-    <section className="mt-8">
+    <section className="mb-6">
       <div className="flex items-center gap-2 mb-4">
         <DollarSign className="text-green-500" size={24} />
         <h2 className="text-xl font-semibold">Financial Health</h2>
       </div>
       
-      <div className={cn("grid grid-cols-1 lg:grid-cols-3 card-spacing", 
-        `dashboard-${preferences.dashboardLayout}`)}>
+      <ResizablePanelGroup direction="horizontal" className={cn("rounded-lg", `dashboard-${preferences.dashboardLayout}`)}>
+        <ResizablePanel defaultSize={65} minSize={40}>
+          <DashboardCard
+            title="AI Financial Insights"
+            subtitle="Smart recommendations for your finances"
+            className="h-full animate-fade-in rounded-r-none"
+            style={{ animationDelay: '100ms' }}
+          >
+            <div className="space-y-3">
+              {getFilteredFinancialRecs().map(rec => (
+                <div 
+                  key={rec.id} 
+                  className={cn("p-3 rounded-lg", 
+                    rec.importance === "high" 
+                      ? "bg-amber-900/30 border border-amber-800" 
+                      : "bg-gray-800/50 border border-gray-700"
+                  )}
+                >
+                  <p className="text-sm">{rec.text}</p>
+                </div>
+              ))}
+            </div>
+          </DashboardCard>
+        </ResizablePanel>
         
-        <DashboardCard
-          title="AI Financial Insights"
-          subtitle="Smart recommendations for your finances"
-          className="lg:col-span-2 animate-fade-in"
-          style={{ animationDelay: '100ms' }}
-        >
-          <div className="space-y-3">
-            {getFilteredFinancialRecs().map(rec => (
-              <div 
-                key={rec.id} 
-                className={cn("p-3 rounded-lg", 
-                  rec.importance === "high" 
-                    ? "bg-amber-900/30 border border-amber-800" 
-                    : "bg-gray-800/50 border border-gray-700"
-                )}
-              >
-                <p className="text-sm">{rec.text}</p>
-              </div>
-            ))}
-          </div>
-        </DashboardCard>
+        <ResizableHandle withHandle />
         
-        <FinancialInsights />
-      </div>
+        <ResizablePanel defaultSize={35} minSize={30}>
+          <DashboardCard
+            title="Financial Analytics"
+            subtitle="Your money trends"
+            className="h-full animate-fade-in rounded-l-none"
+            style={{ animationDelay: '150ms' }}
+          >
+            <div className="h-full">
+              <FinancialInsights />
+            </div>
+          </DashboardCard>
+        </ResizablePanel>
+      </ResizablePanelGroup>
     </section>
   );
 
   return (
-    <div className={`max-w-7xl mx-auto dashboard-${preferences.dashboardLayout}`}>
-      <div className="mb-8">
+    <div className={`max-w-7xl mx-auto px-4 dashboard-${preferences.dashboardLayout}`}>
+      <div className="mb-6">
         <h1 className="text-3xl font-bold">Your Personalized Dashboard</h1>
         <p className="text-gray-400 mt-1">
           AI-powered insights tailored to your preferences
@@ -157,40 +185,41 @@ const PersonalizedDashboard: React.FC = () => {
 
       <PreferencesPanel />
 
-      <div className={cn("card-spacing", `dashboard-${preferences.dashboardLayout}`)}>
-        <DashboardCard
-          title="Upcoming Events & Reminders"
-          subtitle="Important dates to remember"
-          className="animate-fade-in"
-          style={{ animationDelay: '200ms' }}
-        >
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {upcomingEvents.map(event => (
-              <div 
-                key={event.id} 
-                className={cn("p-4 rounded-lg border", 
-                  event.type === "health" 
-                    ? "border-blue-800 bg-blue-900/20" 
-                    : "border-green-800 bg-green-900/20"
+      <div className="my-6">
+        <div className="flex items-center gap-2 mb-4">
+          <Bell className="text-blue-500" size={24} />
+          <h2 className="text-xl font-semibold">Upcoming Events & Reminders</h2>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {upcomingEvents.map(event => (
+            <Card 
+              key={event.id} 
+              className={cn(
+                "p-4 border animate-fade-in", 
+                event.type === "health" 
+                  ? "border-blue-800/50 bg-blue-900/10" 
+                  : "border-green-800/50 bg-green-900/10",
+                `card-padding dashboard-${preferences.dashboardLayout}`
+              )}
+              style={{ animationDelay: `${event.id * 50}ms` }}
+            >
+              <div className="flex items-center gap-2 mb-2">
+                {event.type === "health" ? (
+                  <Activity size={16} className="text-blue-400" />
+                ) : (
+                  <DollarSign size={16} className="text-green-400" />
                 )}
-              >
-                <div className="flex items-center gap-2 mb-2">
-                  {event.type === "health" ? (
-                    <Activity size={16} className="text-blue-400" />
-                  ) : (
-                    <DollarSign size={16} className="text-green-400" />
-                  )}
-                  <span className="text-sm font-medium">{event.type === "health" ? "Health" : "Financial"}</span>
-                </div>
-                <h3 className="font-medium mb-1">{event.title}</h3>
-                <div className="flex items-center gap-1 text-sm text-gray-400">
-                  <Calendar size={14} />
-                  <span>{event.date}</span>
-                </div>
+                <span className="text-sm font-medium">{event.type === "health" ? "Health" : "Financial"}</span>
               </div>
-            ))}
-          </div>
-        </DashboardCard>
+              <h3 className="font-medium mb-1">{event.title}</h3>
+              <div className="flex items-center gap-1 text-sm text-gray-400">
+                <Calendar size={14} />
+                <span>{event.date}</span>
+              </div>
+            </Card>
+          ))}
+        </div>
       </div>
 
       {renderPrioritizedSections()}

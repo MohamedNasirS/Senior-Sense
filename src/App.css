@@ -44,8 +44,26 @@ body {
   padding: 2em;
   background-color: #121212;
   border: 1px solid #333;
+  border-radius: 0.75rem;
 }
 
 .read-the-docs {
   color: #888;
 }
+
+/* Dashboard layout optimization */
+.dashboard-compact .card-spacing {
+  gap: 1rem !important;
+  margin-bottom: 1rem !important;
+}
+
+.dashboard-comfortable .card-spacing {
+  gap: 1.25rem !important;
+  margin-bottom: 1.5rem !important;
+}
+
+.dashboard-spacious .card-spacing {
+  gap: 1.75rem !important;
+  margin-bottom: 2rem !important;
+}
+
