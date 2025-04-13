@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -35,12 +36,64 @@
     --radius: 0.75rem;
   }
 
-  .theme-high-contrast {
+  .theme-light {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+
+    --primary: 211 100% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+
+    --accent: 211 100% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 211 100% 50%;
+  }
+
+  .theme-dark {
     --background: 0 0% 0%;
     --foreground: 0 0% 100%;
-    --card: 0 0% 10%;
-    --primary: 211 100% 60%;
-    --border: 0 0% 30%;
+    
+    --card: 0 0% 7%;
+    --card-foreground: 0 0% 100%;
+    
+    --popover: 0 0% 7%;
+    --popover-foreground: 0 0% 100%;
+    
+    --primary: 211 100% 50%;
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    
+    --muted: 0 0% 15%;
+    --muted-foreground: 240 5% 64.9%;
+    
+    --accent: 211 100% 50%;
+    --accent-foreground: 0 0% 100%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 211 100% 50%;
   }
 
   * {
@@ -50,13 +103,10 @@
   body {
     @apply bg-background text-foreground antialiased;
     font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
-    background-color: black;
-    color: white;
   }
 
   html {
     @apply overflow-x-hidden scroll-smooth;
-    background-color: black;
   }
 
   .text-small {
@@ -82,7 +132,7 @@
 
 @layer components {
   .glass-card {
-    @apply bg-gray-900/90 backdrop-blur-md border border-gray-800 shadow-sm;
+    @apply bg-card backdrop-blur-md border border-border shadow-sm;
   }
   
   .text-balance {
@@ -124,7 +174,7 @@
   }
   
   .black-card {
-    @apply bg-gray-900 border border-gray-800 rounded-lg p-4;
+    @apply bg-card border border-border rounded-lg p-4;
   }
   
   .health-status-card {
@@ -137,6 +187,10 @@
   
   .financial-card {
     @apply black-card border-l-4 border-l-yellow-500;
+  }
+
+  .doctor-card {
+    @apply black-card border-l-4 border-l-purple-500;
   }
 
   /* Dashboard layout styles with optimized sizing */  
@@ -166,7 +220,7 @@
 
   /* Optimized card styles for personalized dashboard */
   .glass-card {
-    @apply rounded-xl border border-gray-800/60;
+    @apply rounded-xl border border-border;
   }
 
   .dashboard-compact .glass-card {
@@ -195,4 +249,31 @@
 
 .animate-scale-in {
   animation: scale-in 0.2s ease-out forwards;
+}
+
+/* Card sizing system */
+.card-container {
+  @apply grid gap-4 md:gap-6;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+.card-sm {
+  @apply p-4;
+  min-height: 100px;
+}
+
+.card-md {
+  @apply p-5;
+  min-height: 180px;
+}
+
+.card-lg {
+  @apply p-6;
+  min-height: 260px;
+}
+
+.card-xl {
+  @apply p-6;
+  min-height: 320px;
+  grid-column: span 2;
 }

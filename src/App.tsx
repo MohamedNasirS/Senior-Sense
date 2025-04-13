@@ -8,6 +8,7 @@ import Layout from "./components/layout/Layout";
 import Index from "./pages/Index";
 import Dashboard from "./pages/Dashboard";
 import PersonalizedDashboard from "./pages/PersonalizedDashboard";
+import Doctor from "./pages/Doctor";
 import NotFound from "./pages/NotFound";
 import { PreferencesProvider } from "./context/PreferencesContext";
 
@@ -25,6 +26,7 @@ const App = () => (
               <Route path="/" element={<Index />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/personalized" element={<PersonalizedDashboard />} />
+              <Route path="/doctor" element={<Doctor />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Layout>

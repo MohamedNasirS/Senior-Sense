@@ -1,7 +1,7 @@
 
 import React, { createContext, useContext, useState, useEffect } from "react";
 
-type Theme = "default" | "high-contrast";
+type Theme = "dark" | "light";
 type FontSize = "small" | "medium" | "large";
 type DashboardLayout = "compact" | "comfortable" | "spacious";
 type DashboardPriority = "health" | "financial" | "balanced";
@@ -20,7 +20,7 @@ interface PreferencesContextType {
 }
 
 const defaultPreferences: Preferences = {
-  theme: "default",
+  theme: "dark",
   fontSize: "medium",
   dashboardLayout: "comfortable",
   dashboardPriority: "balanced",
@@ -43,9 +43,12 @@ export const PreferencesProvider: React.FC<{ children: React.ReactNode }> = ({ c
     document.documentElement.classList.remove("text-small", "text-medium", "text-large");
     document.documentElement.classList.add(`text-${preferences.fontSize}`);
     
-    document.documentElement.classList.remove("theme-default", "theme-high-contrast");
+    document.documentElement.classList.remove("theme-dark", "theme-light");
     document.documentElement.classList.add(`theme-${preferences.theme}`);
     
+    // Apply dashboard layout class to body
+    document.body.classList.remove("dashboard-compact", "dashboard-comfortable", "dashboard-spacious");
+    document.body.classList.add(`dashboard-${preferences.dashboardLayout}`);
   }, [preferences]);
 
   const updatePreference = <K extends keyof Preferences>(key: K, value: Preferences[K]) => {
