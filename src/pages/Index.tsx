@@ -1,4 +1,3 @@
-
 import React from "react";
 import { ArrowRight, BarChart2, LineChart, PieChart, Zap, Shield, CheckCircle, Heart } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
@@ -8,6 +7,8 @@ import ThemeToggle from "@/components/ui/ThemeToggle";
 import { usePreferences } from "@/context/PreferencesContext";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
+import DynamicBackground from "@/components/ui/DynamicBackground";
+import InteractiveHero from "@/components/landing/InteractiveHero";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ const Index = () => {
   const isMobile = useIsMobile();
   
   return (
-    <div className="min-h-screen overflow-hidden">
+    <DynamicBackground className="min-h-screen overflow-hidden">
       {/* Header with Theme Toggle */}
       <header className="absolute top-0 left-0 right-0 z-10 p-4">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
@@ -27,75 +28,11 @@ const Index = () => {
         </div>
       </header>
       
-      {/* Hero Section */}
-      <section className="relative pt-20 pb-32 px-6 flex items-center justify-center min-h-[90vh]">
-        {/* Background gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-primary/20 -z-10" aria-hidden="true"></div>
-        
-        {/* Floating elements */}
-        <div className="absolute top-[15%] left-[10%] w-24 h-24 rounded-full bg-primary/5 animate-float" style={{
-          animationDelay: '0.5s'
-        }} aria-hidden="true"></div>
-        <div className="absolute top-[60%] left-[20%] w-16 h-16 rounded-full bg-primary/5 animate-float" style={{
-          animationDelay: '1.2s'
-        }} aria-hidden="true"></div>
-        <div className="absolute top-[25%] right-[15%] w-20 h-20 rounded-full bg-primary/5 animate-float" style={{
-          animationDelay: '0.8s'
-        }} aria-hidden="true"></div>
-        <div className="absolute bottom-[20%] right-[10%] w-12 h-12 rounded-full bg-primary/5 animate-float" style={{
-          animationDelay: '1.5s'
-        }} aria-hidden="true"></div>
-        
-        <div className="max-w-5xl mx-auto text-center">
-          <div 
-            className="inline-block px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium mb-6 animate-fade-in"
-            style={{ animationDelay: '0ms' }}
-          >
-            Senior Healthcare Management
-          </div>
-          
-          <h1 
-            className="text-4xl md:text-6xl font-bold mb-6 leading-tight tracking-tight text-balance animate-fade-in"
-            style={{ animationDelay: '100ms' }}
-          >
-            Empowering Seniors with <span className="text-primary">Health Insights</span>
-          </h1>
-          
-          <p 
-            className="text-xl text-muted-foreground max-w-3xl mx-auto mb-10 text-balance animate-fade-in"
-            style={{ animationDelay: '200ms' }}
-          >
-            A comprehensive healthcare monitoring platform designed specifically for seniors.
-            Track health metrics, manage medications, and connect with doctors instantly.
-          </p>
-          
-          <div 
-            className="flex flex-wrap justify-center gap-4 animate-fade-in"
-            style={{ animationDelay: '300ms' }}
-          >
-            <Button 
-              size="lg" 
-              className="gap-2 transition-transform hover:scale-105" 
-              onClick={() => navigate("/login")}
-            >
-              Get Started
-              <ArrowRight size={18} />
-            </Button>
-            
-            <Button 
-              variant="outline" 
-              size="lg" 
-              className="gap-2 transition-transform hover:scale-105"
-            >
-              Learn More
-              <Zap size={18} />
-            </Button>
-          </div>
-        </div>
-      </section>
+      {/* Hero Section - Interactive */}
+      <InteractiveHero />
       
       {/* Features Section with improved cards */}
-      <section className="py-20 px-6 bg-background">
+      <section className="py-20 px-6 bg-background/80 backdrop-blur-sm">
         <div className="max-w-6xl mx-auto">
           <div 
             className="text-center mb-16 animate-fade-in"
@@ -169,7 +106,7 @@ const Index = () => {
       </section>
       
       {/* Testimonials Section */}
-      <section className="py-20 px-6 bg-muted/30">
+      <section className="py-20 px-6 bg-muted/30 backdrop-blur-sm">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16 animate-fade-in" style={{ animationDelay: '600ms' }}>
             <h2 className="text-3xl md:text-4xl font-bold mb-4">What Our Users Say</h2>
@@ -219,7 +156,7 @@ const Index = () => {
       </section>
       
       {/* CTA Section with improved design */}
-      <section className="py-20 px-6 bg-gradient-to-br from-primary/5 via-primary/10 to-primary/5">
+      <section className="py-20 px-6 bg-gradient-to-br from-primary/5 via-primary/10 to-primary/5 backdrop-blur-sm">
         <div className="max-w-4xl mx-auto text-center animate-fade-in" style={{
           animationDelay: '800ms'
         }}>
@@ -247,7 +184,7 @@ const Index = () => {
       </section>
       
       {/* Footer */}
-      <footer className="py-12 px-6 bg-card border-t border-border">
+      <footer className="py-12 px-6 bg-card border-t border-border backdrop-blur-sm">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div>
@@ -309,7 +246,7 @@ const Index = () => {
           </div>
         </div>
       </footer>
-    </div>
+    </DynamicBackground>
   );
 };
 

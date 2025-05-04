@@ -33,7 +33,7 @@ const Layout = ({ children, showSidebar = true }: LayoutProps) => {
   
   return (
     <div className={cn(
-      "min-h-screen flex bg-background text-foreground transition-colors duration-300",
+      "min-h-screen flex bg-background text-foreground transition-colors duration-500",
       preferences.theme === "dark" ? "theme-dark" : "theme-light"
     )}>
       {showSidebar && !isLandingOrLogin && (

@@ -113,6 +113,7 @@
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   }
 
+  /* Animation delay utilities */
   .animation-delay-100 {
     animation-delay: 100ms;
   }
@@ -133,6 +134,7 @@
     animation-delay: 500ms;
   }
 
+  /* Interactive element utilities */
   .hover-lift {
     @apply transition-all duration-300 ease-out;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
@@ -143,6 +145,22 @@
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
   }
   
+  /* Interactive particles and elements */
+  .parallax-element {
+    transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  
+  .interactive-card {
+    @apply transition-all duration-500 hover:shadow-lg;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+  
+  .interactive-card:hover {
+    transform: translateY(-5px);
+  }
+
+  /* Original card styles */  
   .black-card {
     @apply bg-card border border-border rounded-lg p-4;
   }
@@ -202,7 +220,7 @@
   }
 }
 
-/* Optimize animations for better performance */
+/* Enhanced animations with better performance */
 @keyframes fade-in {
   from { opacity: 0; transform: translateY(10px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -219,6 +237,24 @@
 
 .animate-scale-in {
   animation: scale-in 0.2s ease-out forwards;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes pulse-subtle {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 4s ease-in-out infinite;
 }
 
 /* Card sizing system */
