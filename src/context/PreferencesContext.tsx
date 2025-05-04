@@ -43,8 +43,14 @@ export const PreferencesProvider: React.FC<{ children: React.ReactNode }> = ({ c
     document.documentElement.classList.remove("text-small", "text-medium", "text-large");
     document.documentElement.classList.add(`text-${preferences.fontSize}`);
     
-    document.documentElement.classList.remove("theme-dark", "theme-light");
-    document.documentElement.classList.add(`theme-${preferences.theme}`);
+    // Apply theme to document
+    if (preferences.theme === "dark") {
+      document.documentElement.classList.add("theme-dark");
+      document.documentElement.classList.remove("theme-light");
+    } else {
+      document.documentElement.classList.add("theme-light");
+      document.documentElement.classList.remove("theme-dark");
+    }
     
     // Apply dashboard layout class to body
     document.body.classList.remove("dashboard-compact", "dashboard-comfortable", "dashboard-spacious");
