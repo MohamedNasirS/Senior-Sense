@@ -22,24 +22,24 @@ const PreferencesPanel: React.FC = () => {
           </div>
           <div className="flex gap-3">
             <button
-              onClick={() => updatePreference("theme", "default")}
+              onClick={() => updatePreference("theme", "light")}
               className={`px-3 py-2 rounded-md text-sm ${
-                preferences.theme === "default"
+                preferences.theme === "light"
                   ? "bg-primary text-white"
                   : "bg-gray-800 text-gray-300 hover:bg-gray-700"
               }`}
             >
-              Default
+              Light
             </button>
             <button
-              onClick={() => updatePreference("theme", "high-contrast")}
+              onClick={() => updatePreference("theme", "dark")}
               className={`px-3 py-2 rounded-md text-sm ${
-                preferences.theme === "high-contrast"
+                preferences.theme === "dark"
                   ? "bg-primary text-white"
                   : "bg-gray-800 text-gray-300 hover:bg-gray-700"
               }`}
             >
-              High Contrast
+              Dark
             </button>
           </div>
         </div>
