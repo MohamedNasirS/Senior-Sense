@@ -45,11 +45,11 @@ export const PreferencesProvider: React.FC<{ children: React.ReactNode }> = ({ c
     
     // Apply theme to document
     if (preferences.theme === "dark") {
-      document.documentElement.classList.add("theme-dark");
-      document.documentElement.classList.remove("theme-light");
+      document.documentElement.classList.add("dark");
+      document.documentElement.classList.remove("light");
     } else {
-      document.documentElement.classList.add("theme-light");
-      document.documentElement.classList.remove("theme-dark");
+      document.documentElement.classList.add("light");
+      document.documentElement.classList.remove("dark");
     }
     
     // Apply dashboard layout class to body

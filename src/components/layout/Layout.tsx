@@ -1,9 +1,10 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import Sidebar from "./Sidebar";
 import { usePreferences } from "@/context/PreferencesContext";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -12,14 +13,27 @@ interface LayoutProps {
 
 const Layout = ({ children, showSidebar = true }: LayoutProps) => {
   const location = useLocation();
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const { preferences } = usePreferences();
+  const isMobile = useIsMobile();
+  
+  // Close sidebar by default on mobile, open by default on desktop
+  useEffect(() => {
+    setSidebarOpen(!isMobile);
+  }, [isMobile]);
+  
+  // Close sidebar when changing routes on mobile
+  useEffect(() => {
+    if (isMobile) {
+      setSidebarOpen(false);
+    }
+  }, [location.pathname, isMobile]);
   
   const isLandingOrLogin = location.pathname === "/" || location.pathname === "/login";
   
   return (
     <div className={cn(
-      "min-h-screen flex bg-background text-foreground",
+      "min-h-screen flex bg-background text-foreground transition-colors duration-300",
       preferences.theme === "dark" ? "theme-dark" : "theme-light"
     )}>
       {showSidebar && !isLandingOrLogin && (
