@@ -9,6 +9,12 @@ import Index from "./pages/Index";
 import Dashboard from "./pages/Dashboard";
 import PersonalizedDashboard from "./pages/PersonalizedDashboard";
 import Doctor from "./pages/Doctor";
+import HealthStatus from "./pages/HealthStatus";
+import Medication from "./pages/Medication";
+import Appointments from "./pages/Appointments";
+import Reminders from "./pages/Reminders";
+import BudgetTracker from "./pages/BudgetTracker";
+import Preferences from "./pages/Preferences";
 import NotFound from "./pages/NotFound";
 import { PreferencesProvider } from "./context/PreferencesContext";
 
@@ -27,6 +33,12 @@ const App = () => (
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/personalized" element={<PersonalizedDashboard />} />
               <Route path="/doctor" element={<Doctor />} />
+              <Route path="/health-status" element={<HealthStatus />} />
+              <Route path="/medication" element={<Medication />} />
+              <Route path="/appointments" element={<Appointments />} />
+              <Route path="/reminders" element={<Reminders />} />
+              <Route path="/budget-tracker" element={<BudgetTracker />} />
+              <Route path="/preferences" element={<Preferences />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Layout>

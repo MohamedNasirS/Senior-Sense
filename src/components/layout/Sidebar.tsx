@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { BarChart2, Home, Heart, PiggyBank, X, Menu, Calendar, Bell, Settings, Sparkles, PhoneCall, Pill } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -117,32 +117,52 @@ const Sidebar = ({ isOpen, setIsOpen }: SidebarProps) => {
             </p>
             
             <Link
-              to="#"
-              className="flex items-center gap-3 px-3 py-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
+              to="/health-status"
+              className={cn(
+                "flex items-center gap-3 px-3 py-2 rounded-md transition-colors",
+                isActive("/health-status") 
+                  ? "bg-primary text-white" 
+                  : "text-muted-foreground hover:text-foreground hover:bg-secondary"
+              )}
             >
               <Heart size={18} />
               <span>Health Status</span>
             </Link>
             
             <Link
-              to="#"
-              className="flex items-center gap-3 px-3 py-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
+              to="/medication"
+              className={cn(
+                "flex items-center gap-3 px-3 py-2 rounded-md transition-colors",
+                isActive("/medication") 
+                  ? "bg-primary text-white" 
+                  : "text-muted-foreground hover:text-foreground hover:bg-secondary"
+              )}
             >
               <Pill size={18} />
               <span>Medication</span>
             </Link>
             
             <Link
-              to="#"
-              className="flex items-center gap-3 px-3 py-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
+              to="/appointments"
+              className={cn(
+                "flex items-center gap-3 px-3 py-2 rounded-md transition-colors",
+                isActive("/appointments") 
+                  ? "bg-primary text-white" 
+                  : "text-muted-foreground hover:text-foreground hover:bg-secondary"
+              )}
             >
               <Calendar size={18} />
               <span>Appointments</span>
             </Link>
             
             <Link
-              to="#"
-              className="flex items-center gap-3 px-3 py-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
+              to="/reminders"
+              className={cn(
+                "flex items-center gap-3 px-3 py-2 rounded-md transition-colors",
+                isActive("/reminders") 
+                  ? "bg-primary text-white" 
+                  : "text-muted-foreground hover:text-foreground hover:bg-secondary"
+              )}
             >
               <Bell size={18} />
               <span>Reminders</span>
@@ -155,8 +175,13 @@ const Sidebar = ({ isOpen, setIsOpen }: SidebarProps) => {
             </p>
             
             <Link
-              to="#"
-              className="flex items-center gap-3 px-3 py-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
+              to="/budget-tracker"
+              className={cn(
+                "flex items-center gap-3 px-3 py-2 rounded-md transition-colors",
+                isActive("/budget-tracker") 
+                  ? "bg-primary text-white" 
+                  : "text-muted-foreground hover:text-foreground hover:bg-secondary"
+              )}
             >
               <PiggyBank size={18} />
               <span>Budget Tracker</span>
@@ -169,8 +194,13 @@ const Sidebar = ({ isOpen, setIsOpen }: SidebarProps) => {
             </p>
             
             <Link
-              to="#"
-              className="flex items-center gap-3 px-3 py-2 rounded-md text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
+              to="/preferences"
+              className={cn(
+                "flex items-center gap-3 px-3 py-2 rounded-md transition-colors",
+                isActive("/preferences") 
+                  ? "bg-primary text-white" 
+                  : "text-muted-foreground hover:text-foreground hover:bg-secondary"
+              )}
             >
               <Settings size={18} />
               <span>Preferences</span>
