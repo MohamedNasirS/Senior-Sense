@@ -1,0 +1,285 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root,
+  .theme-light {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+
+    --primary: 211 100% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+
+    --accent: 211 100% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 211 100% 50%;
+
+    --radius: 0.75rem;
+  }
+
+  .theme-dark {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+    
+    --card: 0 0% 7%;
+    --card-foreground: 0 0% 100%;
+    
+    --popover: 0 0% 7%;
+    --popover-foreground: 0 0% 100%;
+    
+    --primary: 211 100% 50%;
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    
+    --muted: 0 0% 15%;
+    --muted-foreground: 240 5% 64.9%;
+    
+    --accent: 211 100% 50%;
+    --accent-foreground: 0 0% 100%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 211 100% 50%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
+  }
+
+  html {
+    @apply overflow-x-hidden scroll-smooth;
+  }
+
+  .text-small {
+    font-size: 0.875rem;
+  }
+  
+  .text-medium {
+    font-size: 1rem;
+  }
+  
+  .text-large {
+    font-size: 1.125rem;
+  }
+  
+  .text-small h1 { font-size: 1.75rem; }
+  .text-medium h1 { font-size: 2rem; }
+  .text-large h1 { font-size: 2.25rem; }
+  
+  .text-small h2 { font-size: 1.5rem; }
+  .text-medium h2 { font-size: 1.75rem; }
+  .text-large h2 { font-size: 2rem; }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-card backdrop-blur-md border border-border shadow-sm;
+  }
+  
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .subtle-shadow {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Animation delay utilities */
+  .animation-delay-100 {
+    animation-delay: 100ms;
+  }
+  
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+  
+  .animation-delay-300 {
+    animation-delay: 300ms;
+  }
+  
+  .animation-delay-400 {
+    animation-delay: 400ms;
+  }
+  
+  .animation-delay-500 {
+    animation-delay: 500ms;
+  }
+
+  /* Interactive element utilities */
+  .hover-lift {
+    @apply transition-all duration-300 ease-out;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Interactive particles and elements */
+  .parallax-element {
+    transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  
+  .interactive-card {
+    @apply transition-all duration-500 hover:shadow-lg;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+  
+  .interactive-card:hover {
+    transform: translateY(-5px);
+  }
+
+  /* Original card styles */  
+  .black-card {
+    @apply bg-card border border-border rounded-lg p-4;
+  }
+  
+  .health-status-card {
+    @apply black-card border-l-4 border-l-green-500;
+  }
+  
+  .medication-card {
+    @apply black-card border-l-4 border-l-blue-500;
+  }
+  
+  .financial-card {
+    @apply black-card border-l-4 border-l-yellow-500;
+  }
+
+  .doctor-card {
+    @apply black-card border-l-4 border-l-purple-500;
+  }
+
+  /* Dashboard layout styles with optimized sizing */  
+  .dashboard-compact .card-spacing {
+    @apply gap-3 mb-3;
+  }
+  
+  .dashboard-comfortable .card-spacing {
+    @apply gap-6 mb-6;
+  }
+  
+  .dashboard-spacious .card-spacing {
+    @apply gap-8 mb-8;
+  }
+  
+  .dashboard-compact .card-padding {
+    @apply p-3;
+  }
+  
+  .dashboard-comfortable .card-padding {
+    @apply p-5;
+  }
+  
+  .dashboard-spacious .card-padding {
+    @apply p-7;
+  }
+
+  /* Optimized card styles for personalized dashboard */
+  .glass-card {
+    @apply rounded-xl border border-border;
+  }
+
+  .dashboard-compact .glass-card {
+    @apply rounded-lg;
+  }
+
+  .dashboard-spacious .glass-card {
+    @apply rounded-2xl;
+  }
+}
+
+/* Enhanced animations with better performance */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.4s ease-out forwards;
+}
+
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.animate-scale-in {
+  animation: scale-in 0.2s ease-out forwards;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes pulse-subtle {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 4s ease-in-out infinite;
+}
+
+/* Card sizing system */
+.card-container {
+  @apply grid gap-4 md:gap-6;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+.card-sm {
+  @apply p-4;
+  min-height: 100px;
+}
+
+.card-md {
+  @apply p-5;
+  min-height: 180px;
+}
+
+.card-lg {
+  @apply p-6;
+  min-height: 260px;
+}
+
+.card-xl {
+  @apply p-6;
+  min-height: 320px;
+  grid-column: span 2;
+}
