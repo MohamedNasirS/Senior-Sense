@@ -1,10 +1,11 @@
-from rest_framework import generics
-from .serializers import RegisterSerializer
+from rest_framework import generics,permissions
+from .serializers import RegisterSerializer,ElderProfileSerializer, EmergencyContactSerializer
 from django.contrib.auth.models import User
 from rest_framework.permissions import AllowAny
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
+from .models import ElderProfile, EmergencyContact
 
 class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
@@ -21,3 +22,30 @@ def test_post(request):
         return JsonResponse({'received_data': data})
     else:
         return JsonResponse({'message': 'Send a POST request with JSON data'}, status=200)
+
+
+class ElderProfileView(generics.RetrieveUpdateAPIView):
+    serializer_class = ElderProfileSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_object(self):
+        profile, created = ElderProfile.objects.get_or_create(user=self.request.user)
+        return profile
+
+class EmergencyContactListCreateView(generics.ListCreateAPIView):
+    serializer_class = EmergencyContactSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        return EmergencyContact.objects.filter(profile__user=self.request.user)
+
+    def perform_create(self, serializer):
+        profile, created = ElderProfile.objects.get_or_create(user=self.request.user)
+        serializer.save(profile=profile)
+
+class EmergencyContactDeleteView(generics.DestroyAPIView):
+    serializer_class = EmergencyContactSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        return EmergencyContact.objects.filter(profile__user=self.request.user)

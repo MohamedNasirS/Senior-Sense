@@ -55,3 +55,25 @@ class CollaboratorInvitation(models.Model):
 
     def __str__(self):
         return f"Invite from {self.from_user.username} to {self.to_user.username} for '{self.health_record.title}' - {self.status}"
+
+
+#elder profile managment models
+class ElderProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    age = models.PositiveIntegerField()
+    medical_conditions = models.TextField(blank=True)
+    caregiver_name = models.CharField(max_length=255, blank=True)
+    caregiver_phone = models.CharField(max_length=20, blank=True)
+    caregiver_relation = models.CharField(max_length=100, blank=True)
+
+    def __str__(self):
+        return f"{self.user.username}'s Profile"
+
+class EmergencyContact(models.Model):
+    profile = models.ForeignKey(ElderProfile, on_delete=models.CASCADE, related_name='emergency_contacts')
+    name = models.CharField(max_length=255)
+    phone = models.CharField(max_length=20)
+    relation = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f"{self.name} ({self.relation})"
